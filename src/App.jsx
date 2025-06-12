@@ -1,10 +1,14 @@
+import { Route, Routes } from 'react-router';
 import './App.css';
+import ProductsPage from './pages/ProductsPage';
+import HomePage from './pages/HomePage';
 
 function App() {
   return (
-    <div>
-      <h1>Hello</h1>
-    </div>
+    <Routes>
+      <Route index element={<HomePage />} />
+      <Route path='/products' element={<ProductsPage />} />
+    </Routes>
   );
 }
 
