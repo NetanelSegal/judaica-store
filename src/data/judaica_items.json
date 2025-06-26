@@ -1,0 +1,242 @@
+[
+  {
+    "id": 1,
+    "name": "Sterling Silver Kiddush Cup",
+    "image": "https://example.com/images/kiddush_cup.jpg",
+    "category": "Kiddush Items",
+    "price": 89.99,
+    "count": 10
+  },
+  {
+    "id": 2,
+    "name": "Havdalah Set",
+    "image": "https://example.com/images/havdalah_set.jpg",
+    "category": "Havdalah",
+    "price": 120.0,
+    "count": 5
+  },
+  {
+    "id": 3,
+    "name": "Shabbat Candlesticks",
+    "image": "https://example.com/images/candlesticks.jpg",
+    "category": "Shabbat Table",
+    "price": 75.5,
+    "count": 12
+  },
+  {
+    "id": 4,
+    "name": "Mezuzah Scroll and Case",
+    "image": "https://example.com/images/mezuzah.jpg",
+    "category": "Mezuzahs",
+    "price": 39.95,
+    "count": 30
+  },
+  {
+    "id": 5,
+    "name": "Menorah - Modern Design",
+    "image": "https://example.com/images/menorah.jpg",
+    "category": "Hanukkah",
+    "price": 65.0,
+    "count": 15
+  },
+  {
+    "id": 6,
+    "name": "Tallit - Blue and Silver",
+    "image": "https://example.com/images/tallit.jpg",
+    "category": "Tallit & Bags",
+    "price": 99.99,
+    "count": 8
+  },
+  {
+    "id": 7,
+    "name": "Tefillin Set",
+    "image": "https://example.com/images/tefillin.jpg",
+    "category": "Tefillin",
+    "price": 350.0,
+    "count": 3
+  },
+  {
+    "id": 8,
+    "name": "Hebrew-English Siddur",
+    "image": "https://example.com/images/siddur.jpg",
+    "category": "Prayer Books",
+    "price": 25.0,
+    "count": 20
+  },
+  {
+    "id": 9,
+    "name": "Torah Pointer (Yad)",
+    "image": "https://example.com/images/yad.jpg",
+    "category": "Torah Accessories",
+    "price": 45.0,
+    "count": 10
+  },
+  {
+    "id": 10,
+    "name": "Kippah - Velvet",
+    "image": "https://example.com/images/kippah.jpg",
+    "category": "Head Coverings",
+    "price": 9.99,
+    "count": 100
+  },
+  {
+    "id": 11,
+    "name": "Seder Plate - Ceramic",
+    "image": "https://example.com/images/seder_plate.jpg",
+    "category": "Passover",
+    "price": 55.0,
+    "count": 7
+  },
+  {
+    "id": 12,
+    "name": "Challah Cover - Embroidered",
+    "image": "https://example.com/images/challah_cover.jpg",
+    "category": "Challah Accessories",
+    "price": 29.99,
+    "count": 18
+  },
+  {
+    "id": 13,
+    "name": "Shofar - Medium Size",
+    "image": "https://example.com/images/shofar.jpg",
+    "category": "Shofars",
+    "price": 80.0,
+    "count": 6
+  },
+  {
+    "id": 14,
+    "name": "Dreidels - Wood Set",
+    "image": "https://example.com/images/dreidels.jpg",
+    "category": "Holiday Toys",
+    "price": 14.5,
+    "count": 25
+  },
+  {
+    "id": 15,
+    "name": "Hanukkah Gelt (Chocolate Coins)",
+    "image": "https://example.com/images/gelt.jpg",
+    "category": "Holiday Treats",
+    "price": 5.0,
+    "count": 50
+  },
+  {
+    "id": 16,
+    "name": "Aleph-Bet Wall Poster",
+    "image": "https://example.com/images/aleph_bet.jpg",
+    "category": "Educational",
+    "price": 12.99,
+    "count": 40
+  },
+  {
+    "id": 17,
+    "name": "Jewish Star Necklace",
+    "image": "https://example.com/images/star_necklace.jpg",
+    "category": "Jewelry",
+    "price": 19.99,
+    "count": 22
+  },
+  {
+    "id": 18,
+    "name": "Jerusalem Wall Art",
+    "image": "https://example.com/images/jerusalem_art.jpg",
+    "category": "Home Decor",
+    "price": 60.0,
+    "count": 9
+  },
+  {
+    "id": 19,
+    "name": "Charoset Dish",
+    "image": "https://example.com/images/charoset_dish.jpg",
+    "category": "Passover",
+    "price": 18.0,
+    "count": 14
+  },
+  {
+    "id": 20,
+    "name": "Yemenite Shofar",
+    "image": "https://example.com/images/yemenite_shofar.jpg",
+    "category": "Shofars",
+    "price": 200.0,
+    "count": 2
+  },
+  {
+    "id": 21,
+    "name": "Passover Haggadah",
+    "image": "https://example.com/images/haggadah.jpg",
+    "category": "Prayer Books",
+    "price": 10.0,
+    "count": 60
+  },
+  {
+    "id": 22,
+    "name": "Kiddush Fountain",
+    "image": "https://example.com/images/kiddush_fountain.jpg",
+    "category": "Kiddush Items",
+    "price": 150.0,
+    "count": 4
+  },
+  {
+    "id": 23,
+    "name": "Tallit Bag",
+    "image": "https://example.com/images/tallit_bag.jpg",
+    "category": "Tallit & Bags",
+    "price": 35.0,
+    "count": 15
+  },
+  {
+    "id": 24,
+    "name": "Mezuzah - Glass Art",
+    "image": "https://example.com/images/mezuzah_glass.jpg",
+    "category": "Mezuzahs",
+    "price": 42.0,
+    "count": 17
+  },
+  {
+    "id": 25,
+    "name": "Challah Knife",
+    "image": "https://example.com/images/challah_knife.jpg",
+    "category": "Challah Accessories",
+    "price": 24.99,
+    "count": 11
+  },
+  {
+    "id": 26,
+    "name": "Ketubah - Art Print",
+    "image": "https://example.com/images/ketubah.jpg",
+    "category": "Home Decor",
+    "price": 130.0,
+    "count": 3
+  },
+  {
+    "id": 27,
+    "name": "Purim Gragger",
+    "image": "https://example.com/images/gragger.jpg",
+    "category": "Holiday Toys",
+    "price": 7.5,
+    "count": 34
+  },
+  {
+    "id": 28,
+    "name": "Hebrew Calendar",
+    "image": "https://example.com/images/calendar.jpg",
+    "category": "Educational",
+    "price": 16.0,
+    "count": 28
+  },
+  {
+    "id": 29,
+    "name": "Shabbat Tablecloth",
+    "image": "https://example.com/images/tablecloth.jpg",
+    "category": "Shabbat Table",
+    "price": 40.0,
+    "count": 7
+  },
+  {
+    "id": 30,
+    "name": "Jewish Home Blessing Plaque",
+    "image": "https://example.com/images/blessing_plaque.jpg",
+    "category": "Home Decor",
+    "price": 22.5,
+    "count": 13
+  }
+]

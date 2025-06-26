@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router';
 import './App.css';
 import ProductsPage from './pages/ProductsPage';
-import HomePage from './pages/HomePage';
+import HomePage from './pages/HomePage/HomePage';
 import Navbar from './components/Navbar';
 
 export const links = [
@@ -14,8 +14,8 @@ function App() {
     <>
       <Navbar />
       <Routes>
-        {links.map((link) => (
-          <Route path={link.path} element={link.element} />
+        {links.map(({ path, element }) => (
+          <Route path={path} element={element} />
         ))}
       </Routes>
     </>
