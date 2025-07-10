@@ -5,6 +5,8 @@ import Navbar from "./components/Navbar";
 import ProductsPage from "./pages/ProductsPage/ProductsPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
+import AuthContext from "./contexts/AuthContext";
+import { useState } from "react";
 
 export const links = [
   { path: "/", title: "Home", element: <HomePage /> },
@@ -14,15 +16,16 @@ export const links = [
 ];
 
 function App() {
+  const [user, setUser] = useState(null);
   return (
-    <>
+    <AuthContext.Provider value={{ user, setUser }}>
       <Navbar />
       <Routes>
         {links.map(({ path, element }) => (
           <Route path={path} element={element} />
         ))}
       </Routes>
-    </>
+    </AuthContext.Provider>
   );
 }
 

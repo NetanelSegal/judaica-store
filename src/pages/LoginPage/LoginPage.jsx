@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import AuthContext from "../../contexts/AuthContext";
 
 const LoginPage = () => {
+  const { setUser } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -19,8 +21,9 @@ const LoginPage = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-      const data = await response.json();
-      console.log(data);
+      const { token, user } = await response.json();
+      localStorage.setItem("token", token);
+      setUser(user);
     } catch (err) {
       console.log(err);
     }
