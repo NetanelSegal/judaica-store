@@ -30,31 +30,35 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="auth-container">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="min-h-screen flex items-center justify-center bg-[#EAE0D6] py-12 px-4">
+      <div className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md">
+        <h2 className="text-3xl font-bold text-[#22333B] text-center mb-6">Login</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label>Email:</label>
-          <input
-            id="email"
-            type="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
+            <label htmlFor="email" className="block text-[#22333B] font-semibold mb-1">Email:</label>
+            <input
+              id="email"
+              type="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#22333B]"
+            />
+          </div>
         <div>
-          <label>Password:</label>
-          <input
-            id="password"
-            type="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <button type="submit">Login</button>
+            <label htmlFor="password" className="block text-[#22333B] font-semibold mb-1">Password:</label>
+            <input
+              id="password"
+              type="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#22333B]"
+            />
+          </div>
+        <button type="submit" className="w-full bg-[#22333B] text-white py-2 rounded-xl font-semibold text-lg mt-4 hover:bg-[#1a2630] transition-colors">Login</button>
       </form>
+      </div>
     </div>
   );
 };
