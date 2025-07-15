@@ -1,3 +1,4 @@
+import axios from "axios";
 import { Route, Routes } from "react-router";
 import "./App.css";
 import HomePage from "./pages/HomePage/HomePage";
@@ -40,15 +41,15 @@ function App() {
   useEffect(() => {
     const validateToken = async () => {
       try {
-        const response = await fetch("http://localhost:3000/auth/validate", {
+        const { data } = await axios("http://localhost:3000/auth/validate", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });
-        const data = await response.json();
-        // setUser(data);
+
+        setUser(data);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
     validateToken();
