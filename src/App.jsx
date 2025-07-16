@@ -41,11 +41,14 @@ function App() {
   useEffect(() => {
     const validateToken = async () => {
       try {
-        const { data } = await axios("http://localhost:3000/auth/validate", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
+        const { data } = await axios.get(
+          "http://localhost:3000/auth/validate",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
 
         setUser(data);
       } catch (error) {

@@ -1,11 +1,16 @@
+import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
 
 const SignupPage = () => {
+  const nav = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
   });
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -15,15 +20,22 @@ const SignupPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3000/auth/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-      const data = await response.json();
-      console.log(data);
+      setIsLoading(true);
+      const { data } = await axios.post(
+        "http://localhost:3000/auth/signup",
+        formData
+      );
+      setError("");
+      nav("/login");
     } catch (err) {
-      console.log(err);
+      console.error(err);
+      if (err.status === 409) {
+        setError("User already exists");
+        return;
+      }
+      setError("something went wrong");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -86,8 +98,9 @@ const SignupPage = () => {
             type="submit"
             className="w-full bg-[#22333B] text-white py-2 rounded-xl font-semibold text-lg mt-4 hover:bg-[#1a2630] transition-colors"
           >
-            Sign Up
+            {isLoading ? "Loading..." : "Sign Up"}
           </button>
+          {error && <p>{error}</p>}
         </form>
       </div>
     </div>
