@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
+import Error from "../../components/Error";
 
 const SignupPage = () => {
   const nav = useNavigate();
@@ -100,7 +101,7 @@ const SignupPage = () => {
           >
             {isLoading ? "Loading..." : "Sign Up"}
           </button>
-          {error && <p>{error}</p>}
+          <Error error={error} />
         </form>
       </div>
     </div>

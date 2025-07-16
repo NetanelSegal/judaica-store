@@ -1,15 +1,32 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function FilterByCategory({
   setSelectedCategory,
   selectedCategory,
 }) {
   const [categories, setCategories] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:3000/categories")
-      .then((res) => res.json())
-      .then((data) => setCategories(data));
+    const fetchCategories = async () => {
+      try {
+        setIsLoading(true);
+        const { data } = await axios.get("http://localhost:3000/categories");
+        setCategories(data);
+      } catch (err) {
+        console.log(err);
+        if (err.status === 404) {
+          setError("Categories not found");
+          return;
+        }
+        setError("something went wrong");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchCategories();
   }, []);
 
   return (
@@ -21,6 +38,8 @@ export default function FilterByCategory({
         >
           Category
         </label>
+        {isLoading && <p>Loading...</p>}
+        {error && <p>{error}</p>}
         <select
           id="category"
           name="category"
@@ -30,7 +49,9 @@ export default function FilterByCategory({
         >
           <option value="">All</option>
           {categories.map((c) => (
-            <option key={c.id}>{c.name}</option>
+            <option value={c.categoryCode} key={c.id}>
+              {c.name}
+            </option>
           ))}
         </select>
       </div>

@@ -9,7 +9,31 @@ import SignupPage from "./pages/SignupPage";
 import AuthContext from "./contexts/AuthContext";
 import { useEffect, useState } from "react";
 
-export const loggedInLinks = [
+export const links = [
+  {
+    path: "/",
+    title: "Home",
+    element: <HomePage />,
+    allowedRoles: ["user", "admin", "guest"],
+  },
+  {
+    path: "/products",
+    title: "Products",
+    element: <ProductsPage />,
+    allowedRoles: ["user", "admin", "guest"],
+  },
+  {
+    path: "/login",
+    title: "Login",
+    element: <LoginPage />,
+    allowedRoles: ["guest"],
+  },
+  {
+    path: "/signup",
+    title: "Signup",
+    element: <SignupPage />,
+    allowedRoles: ["guest"],
+  },
   {
     path: "/logout",
     title: "Logout",
@@ -18,22 +42,23 @@ export const loggedInLinks = [
         <h1>Logout</h1>
       </div>
     ),
+    allowedRoles: ["user", "admin"],
   },
-];
-
-export const notLoggedInLinks = [
-  { path: "/login", title: "Login", element: <LoginPage /> },
   {
-    path: "/signup",
-    title: "Signup",
-    element: <SignupPage />,
+    path: "/admin",
+    title: "Admin",
+    element: (
+      <div>
+        <h1>Admin page</h1>
+      </div>
+    ),
+    allowedRoles: ["admin"],
   },
 ];
 
-export const links = [
-  { path: "/", title: "Home", element: <HomePage /> },
-  { path: "/products", title: "Products", element: <ProductsPage /> },
-];
+export const filterLinks = (links, role) => {
+  return links.filter(({ allowedRoles }) => allowedRoles.includes(role));
+};
 
 function App() {
   const [user, setUser] = useState(null);
@@ -62,17 +87,9 @@ function App() {
     <AuthContext.Provider value={{ user, setUser }}>
       <Navbar />
       <Routes>
-        {links.map(({ path, element }) => (
+        {filterLinks(links, user?.role || "guest").map(({ path, element }) => (
           <Route path={path} element={element} />
         ))}
-
-        {user
-          ? loggedInLinks.map(({ path, element }) => (
-              <Route path={path} element={element} />
-            ))
-          : notLoggedInLinks.map(({ path, element }) => (
-              <Route path={path} element={element} />
-            ))}
       </Routes>
     </AuthContext.Provider>
   );
