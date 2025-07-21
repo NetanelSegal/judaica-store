@@ -1,9 +1,10 @@
-import axios from "axios";
+import { api } from "./api";
 import { Route, Routes } from "react-router";
 import "./App.css";
-import HomePage from "./pages/HomePage/HomePage";
+import HomePage from "./pages/HomePage";
+import AdminPage from "./pages/AdminPage";
 import Navbar from "./components/Navbar";
-import ProductsPage from "./pages/ProductsPage/ProductsPage";
+import ProductsPage from "./pages/ProductsPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import AuthContext from "./contexts/AuthContext";
@@ -47,11 +48,7 @@ export const links = [
   {
     path: "/admin",
     title: "Admin",
-    element: (
-      <div>
-        <h1>Admin page</h1>
-      </div>
-    ),
+    element: <AdminPage />, // Professional admin dashboard
     allowedRoles: ["admin"],
   },
 ];
@@ -66,7 +63,7 @@ function App() {
   useEffect(() => {
     const validateToken = async () => {
       try {
-        const { data } = await axios.get(
+        const { data } = await api.get(
           "http://localhost:3000/auth/validate",
           {
             headers: {

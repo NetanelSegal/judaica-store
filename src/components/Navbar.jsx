@@ -29,7 +29,7 @@ export default function Navbar() {
         {filterLinks(links, user?.role || "guest").map(renderLink)}
         {user && (
           <button
-            className="bg-[#22333B] text-white px-6 py-2 rounded-xl font-semibold hover:bg-[#41515e] transition"
+            className="bg-[#EAE0D6] text-[#22333B] border-[#22333B] px-6 py-2 rounded-xl font-semibold hover:bg-[#22333B] hover:border-[#EAE0D6] hover:text-white border-2 transition"
             onClick={handleLogout}
           >
             Logout

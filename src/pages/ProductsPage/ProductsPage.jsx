@@ -1,7 +1,7 @@
 import ProductCard from "../../components/ProductCard";
 import { useEffect, useState } from "react";
 import FilterByCategory from "./components/FilterByCategory";
-import axios from "axios";
+import { api } from "../../api";
 
 export default function ProductsPage() {
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -14,7 +14,7 @@ export default function ProductsPage() {
     const fetchProducts = async () => {
       try {
         setIsLoading(true);
-        const { data } = await axios.get("http://localhost:3000/products");
+        const { data } = await api.get("/products");
         setProducts(data);
         setError("");
       } catch (err) {
@@ -50,7 +50,7 @@ export default function ProductsPage() {
         {isLoading && <p>Loading...</p>}
         {error && <p>{error}</p>}
         {filteredProducts.map((p) => (
-          <ProductCard key={p.id} product={p} />
+          <ProductCard key={p._id} product={p} />
         ))}
       </div>
     </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { api } from "../../../api";
 
 export default function FilterByCategory({
   setSelectedCategory,
@@ -13,7 +13,7 @@ export default function FilterByCategory({
     const fetchCategories = async () => {
       try {
         setIsLoading(true);
-        const { data } = await axios.get("http://localhost:3000/categories");
+        const { data } = await api.get("/categories");
         setCategories(data);
       } catch (err) {
         console.log(err);
@@ -49,7 +49,7 @@ export default function FilterByCategory({
         >
           <option value="">All</option>
           {categories.map((c) => (
-            <option value={c.categoryCode} key={c.id}>
+            <option value={c.categoryCode} key={c._id}>
               {c.name}
             </option>
           ))}

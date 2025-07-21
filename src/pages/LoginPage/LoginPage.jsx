@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import AuthContext from "../../contexts/AuthContext";
-import axios from "axios";
+import { api } from "../../api";
 import Error from "../../components/Error";
 import { useNavigate } from "react-router";
 
@@ -23,7 +23,7 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       setIsLoading(true);
-      const { data } = await axios.post(
+      const { data } = await api.post(
         "http://localhost:3000/auth/login",
         formData
       );
