@@ -1,7 +1,7 @@
 import ProductCard from "../../components/ProductCard";
 import { useEffect, useState } from "react";
 import FilterByCategory from "./components/FilterByCategory";
-import { api } from "../../api";
+import { api } from "../../utils/api";
 
 export default function ProductsPage() {
   const [selectedCategory, setSelectedCategory] = useState("");

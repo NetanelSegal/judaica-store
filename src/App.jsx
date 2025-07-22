@@ -1,4 +1,4 @@
-import { api } from "./api";
+import { api } from "./utils/api";
 import { Route, Routes } from "react-router";
 import "./App.css";
 import HomePage from "./pages/HomePage";
@@ -63,15 +63,7 @@ function App() {
   useEffect(() => {
     const validateToken = async () => {
       try {
-        const { data } = await api.get(
-          "http://localhost:3000/auth/validate",
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
-
+        const { data } = await api.get("auth/validate");
         setUser(data);
       } catch (error) {
         console.error(error);

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Error from "../../../components/Error";
-import { api } from "../../../api";
+import { api } from "../../../utils/api";
 import AddProductForm from "./AddProductForm";
 
 export default function AdminProducts({

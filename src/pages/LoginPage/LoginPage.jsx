@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import AuthContext from "../../contexts/AuthContext";
-import { api } from "../../api";
+import { api } from "../../utils/api";
 import Error from "../../components/Error";
 import { useNavigate } from "react-router";
 

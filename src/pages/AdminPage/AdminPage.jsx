@@ -3,7 +3,7 @@ import AdminUsers from "./components/AdminUsers";
 import AdminCategories from "./components/AdminCategories";
 import AdminProducts from "./components/AdminProducts";
 import AdminSidebarButton from "./components/AdminSidebarButton";
-import { api } from "../../api";
+import { api } from "../../utils/api";
 
 const sections = ["users", "categories", "products"];
 
@@ -30,7 +30,10 @@ export default function AdminPage() {
   const handleCategoryUpdated = (categoryCode, newName, newCategoryObj) => {
     setCategories((prev) => {
       // If newCategoryObj provided, it's a new category
-      if (newCategoryObj && !prev.some(c => c.categoryCode === categoryCode)) {
+      if (
+        newCategoryObj &&
+        !prev.some((c) => c.categoryCode === categoryCode)
+      ) {
         return [...prev, newCategoryObj];
       }
       // Otherwise, update name
@@ -39,7 +42,6 @@ export default function AdminPage() {
       );
     });
   };
-
 
   return (
     <div className="max-w-6xl mx-auto py-8 font-sans flex">

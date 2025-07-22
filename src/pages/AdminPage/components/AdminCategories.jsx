@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { api } from "../../../api";
+import { api } from "../../../utils/api";
 import AddCategoryForm from "./AddCategoryForm";
 
 export default function AdminCategories({

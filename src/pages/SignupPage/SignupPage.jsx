@@ -1,4 +1,4 @@
-import { api } from "../../api";
+import { api } from "../../utils/api";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import Error from "../../components/Error";
