@@ -9,6 +9,7 @@ import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import AuthContext from "./contexts/AuthContext";
 import { useEffect, useState } from "react";
+import CartContext from "./contexts/CartContext";
 
 export const links = [
   {
@@ -39,7 +40,7 @@ export const links = [
   {
     path: "/admin",
     title: "Admin",
-    element: <AdminPage />, // Professional admin dashboard
+    element: <AdminPage />,
     allowedRoles: ["admin"],
   },
 ];
@@ -50,6 +51,7 @@ export const filterLinks = (links, role) => {
 
 function App() {
   const [user, setUser] = useState(null);
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     const validateToken = async () => {
@@ -65,12 +67,16 @@ function App() {
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>
-      <Navbar />
-      <Routes>
-        {filterLinks(links, user?.role || "guest").map(({ path, element }) => (
-          <Route path={path} element={element} />
-        ))}
-      </Routes>
+      <CartContext.Provider value={{ cart, setCart }}>
+        <Navbar />
+        <Routes>
+          {filterLinks(links, user?.role || "guest").map(
+            ({ path, element }) => (
+              <Route path={path} element={element} />
+            )
+          )}
+        </Routes>
+      </CartContext.Provider>
     </AuthContext.Provider>
   );
 }

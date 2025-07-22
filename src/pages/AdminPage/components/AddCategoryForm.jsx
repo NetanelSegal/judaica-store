@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-export default function AddCategoryForm({ onCategoryAdded, loading }) {
+export default function AddCategoryForm({ onCategoryAdd }) {
   const [form, setForm] = useState({ name: "", categoryCode: "" });
   const [error, setError] = useState("");
-  const [submitting, setSubmitting] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -12,17 +12,17 @@ export default function AddCategoryForm({ onCategoryAdded, loading }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    setSubmitting(true);
+    setLoading(true);
     try {
       if (!form.name || !form.categoryCode) {
         setError("Name and code required");
-        setSubmitting(false);
+        setLoading(false);
         return;
       }
-      await onCategoryAdded(form, setError, setForm);
+      await onCategoryAdd(form);
       setForm({ name: "", categoryCode: "" });
     } finally {
-      setSubmitting(false);
+      setLoading(false);
     }
   };
 
@@ -34,7 +34,7 @@ export default function AddCategoryForm({ onCategoryAdded, loading }) {
         name="name"
         value={form.name}
         onChange={handleChange}
-        disabled={loading || submitting}
+        disabled={loading}
       />
       <input
         className="border rounded px-2 py-1"
@@ -42,14 +42,14 @@ export default function AddCategoryForm({ onCategoryAdded, loading }) {
         name="categoryCode"
         value={form.categoryCode}
         onChange={handleChange}
-        disabled={loading || submitting}
+        disabled={loading}
       />
       <button
         type="submit"
         className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 text-sm"
-        disabled={loading || submitting}
+        disabled={loading}
       >
-        {(loading || submitting) ? "Adding..." : "Add Category"}
+        {loading ? "Adding..." : "Add Category"}
       </button>
       {error && <span className="text-red-600 ml-2">{error}</span>}
     </form>

@@ -27,20 +27,30 @@ export default function AdminPage() {
     fetchCategories();
   }, []);
 
-  const handleCategoryUpdated = (categoryCode, newName, newCategoryObj) => {
-    setCategories((prev) => {
-      // If newCategoryObj provided, it's a new category
-      if (
-        newCategoryObj &&
-        !prev.some((c) => c.categoryCode === categoryCode)
-      ) {
-        return [...prev, newCategoryObj];
-      }
-      // Otherwise, update name
-      return prev.map((c) =>
-        c.categoryCode === categoryCode ? { ...c, name: newName } : c
-      );
-    });
+  const handleCategoryUpdated = async (categoryCode, newName) => {
+    try {
+      await api.put(`/categories/${categoryCode}`, {
+        name: newName,
+      });
+      setCategories((prev) => {
+        return prev.map((c) =>
+          c.categoryCode === categoryCode ? { ...c, name: newName } : c
+        );
+      });
+    } catch {
+      alert("Failed to update category");
+    }
+  };
+
+  const handleCategoryAdd = async (newCategory) => {
+    try {
+      const { data } = await api.post("/categories", newCategory);
+      setCategories((prev) => {
+        return [...prev, data];
+      });
+    } catch {
+      alert("Failed to add category");
+    }
   };
 
   return (
@@ -69,6 +79,7 @@ export default function AdminPage() {
             catLoading={catLoading}
             catError={catError}
             onCategoryUpdated={handleCategoryUpdated}
+            onCategoryAdd={handleCategoryAdd}
           />
         )}
         {currentSection === "products" && (
