@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
+import CartContext from "../contexts/CartContext";
 
 const CartItem = ({ item }) => {
+  const { cart, setCart } = useContext(CartContext);
+
+  const handleOnRemove = () => {
+    setCart((prevCart) =>
+      prevCart.filter((cartItem) => cartItem._id !== item._id)
+    );
+  };
+
   return (
     <div
       key={item._id}
-      className="flex items-center shrink-0 gap-4 overflow-hidden shadow-lg rounded-2xl border border-[#22333B] bg-white p-4 transition-transform hover:scale-[1.025] hover:shadow-xl"
+      className="flex items-center shrink-0 gap-4 overflow-hidden shadow-lg rounded-2xl border border-[#22333B] bg-[#EAE0D6] p-4"
       style={{ minHeight: 96 }}
     >
       <img
@@ -17,9 +26,25 @@ const CartItem = ({ item }) => {
         <span className="text-[#22333B] font-semibold text-base">
           ₪{item.price}
         </span>
-        <span className="text-xs bg-[#22333B] text-white rounded-full px-3 py-1 ml-2">
-          x{item.count}
-        </span>
+        <input
+          type="number"
+          min={1}
+          max={item.count}
+          value={item.count}
+          onChange={(e) =>
+            setCart((prevCart) =>
+              prevCart.map((cartItem) =>
+                cartItem._id === item._id
+                  ? { ...cartItem, count: e.target.value }
+                  : cartItem
+              )
+            )
+          }
+          className="text-xs bg-[#22333B] text-white rounded-full px-3 py-1 w-16"
+        />
+        <button onClick={handleOnRemove} className="text-red-600">
+          Remove
+        </button>
       </div>
     </div>
   );
