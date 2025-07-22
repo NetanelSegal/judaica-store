@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Error from "../../../components/Error";
 import { api } from "../../../api";
+import AddProductForm from "./AddProductForm";
 
 export default function AdminProducts({
   categories = [],
@@ -25,6 +26,15 @@ export default function AdminProducts({
     fetchProducts();
   }, []);
 
+  if (loading)
+    return <div className="text-center py-8">Loading products...</div>;
+  if (error)
+    return <div className="text-center text-red-600 py-8">{error}</div>;
+  if (catLoading)
+    return <div className="text-center py-8">Loading categories...</div>;
+  if (catError)
+    return <div className="text-center text-red-600 py-8">{catError}</div>;
+
   const handleProductUpdated = (id, updatedFields) => {
     setProducts((prev) =>
       prev.map((p) => (p._id === id ? { ...p, ...updatedFields } : p))
@@ -35,20 +45,28 @@ export default function AdminProducts({
     setProducts((prev) => prev.filter((p) => p._id !== id));
   };
 
-  if (loading)
-    return <div className="text-center py-8">Loading products...</div>;
-  if (error)
-    return <div className="text-center text-red-600 py-8">{error}</div>;
-  if (catLoading)
-    return <div className="text-center py-8">Loading categories...</div>;
-  if (catError)
-    return <div className="text-center text-red-600 py-8">{catError}</div>;
+  const handleAddProduct = async (form, setError, resetForm) => {
+    try {
+      const { data } = await api.post("/products", {
+        ...form,
+        price: Number(form.price),
+      });
+      setProducts((prev) => [...prev, data]);
+      resetForm({ name: "", price: "", image: "", categoryCode: "" });
+    } catch (err) {
+      setError("Failed to add product");
+    }
+  };
 
   return (
     <section className="py-6">
       <h2 className="text-2xl font-bold text-[#22333B] flex items-center gap-2 mb-4">
         <i className="fa-solid fa-box"></i> Products
       </h2>
+      <AddProductForm
+        onProductAdded={handleAddProduct}
+        categories={categories}
+      />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.map((p) => (
           <ProductCard

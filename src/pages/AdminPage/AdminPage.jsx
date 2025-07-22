@@ -27,13 +27,19 @@ export default function AdminPage() {
     fetchCategories();
   }, []);
 
-  const handleCategoryUpdated = (categoryCode, newName) => {
-    setCategories((prev) =>
-      prev.map((c) =>
+  const handleCategoryUpdated = (categoryCode, newName, newCategoryObj) => {
+    setCategories((prev) => {
+      // If newCategoryObj provided, it's a new category
+      if (newCategoryObj && !prev.some(c => c.categoryCode === categoryCode)) {
+        return [...prev, newCategoryObj];
+      }
+      // Otherwise, update name
+      return prev.map((c) =>
         c.categoryCode === categoryCode ? { ...c, name: newName } : c
-      )
-    );
+      );
+    });
   };
+
 
   return (
     <div className="max-w-6xl mx-auto py-8 font-sans flex">

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { api } from "../../../api";
+import AddCategoryForm from "./AddCategoryForm";
 
 export default function AdminCategories({
   categories = [],
@@ -12,11 +13,25 @@ export default function AdminCategories({
   if (catError)
     return <div className="text-center text-red-600 py-8">{catError}</div>;
 
+  // Handler to pass to AddCategoryForm
+  const handleAddCategory = async (form, setError, resetForm) => {
+    try {
+      const { data } = await api.post("/categories", form);
+      if (typeof onCategoryUpdated === "function") {
+        onCategoryUpdated(data.categoryCode, data.name, data);
+      }
+      resetForm({ name: "", categoryCode: "" });
+    } catch (err) {
+      setError("Failed to add category");
+    }
+  };
+
   return (
     <section className="bg-white rounded-2xl shadow-md p-6 mb-8">
       <h2 className="text-2xl font-bold text-[#22333B] flex items-center gap-2 mb-4">
         <i className="fa-solid fa-tags"></i> Categories
       </h2>
+      <AddCategoryForm onCategoryAdded={handleAddCategory} />
       <div className="overflow-x-auto">
         <table className="min-w-full text-left text-sm">
           <thead className="bg-[#EAE0D6]">
