@@ -35,16 +35,7 @@ export const links = [
     element: <SignupPage />,
     allowedRoles: ["guest"],
   },
-  // {
-  //   path: "/logout",
-  //   title: "Logout",
-  //   element: (
-  //     <div>
-  //       <h1>Logout</h1>
-  //     </div>
-  //   ),
-  //   allowedRoles: ["user", "admin"],
-  // },
+
   {
     path: "/admin",
     title: "Admin",
