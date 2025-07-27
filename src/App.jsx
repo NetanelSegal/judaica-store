@@ -1,4 +1,8 @@
 import { api } from "./utils/api";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+
+const stripePromise = loadStripe("pk_test_YOUR_PUBLISHABLE_KEY"); // TODO: Replace with your real key
 import { Route, Routes } from "react-router";
 import "./App.css";
 import HomePage from "./pages/HomePage";
@@ -66,18 +70,20 @@ function App() {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, setUser }}>
-      <CartContext.Provider value={{ cart, setCart }}>
-        <Navbar />
-        <Routes>
-          {filterLinks(links, user?.role || "guest").map(
-            ({ path, element }) => (
-              <Route path={path} element={element} />
-            )
-          )}
-        </Routes>
-      </CartContext.Provider>
-    </AuthContext.Provider>
+    <Elements stripe={stripePromise}>
+      <AuthContext.Provider value={{ user, setUser }}>
+        <CartContext.Provider value={{ cart, setCart }}>
+          <Navbar />
+          <Routes>
+            {filterLinks(links, user?.role || "guest").map(
+              ({ path, element }) => (
+                <Route path={path} element={element} />
+              )
+            )}
+          </Routes>
+        </CartContext.Provider>
+      </AuthContext.Provider>
+    </Elements>
   );
 }
 

@@ -2,11 +2,21 @@ import React, { useContext } from "react";
 import CartContext from "../contexts/CartContext";
 
 const CartItem = ({ item }) => {
-  const { cart, setCart } = useContext(CartContext);
+  const { setCart } = useContext(CartContext);
 
   const handleOnRemove = () => {
     setCart((prevCart) =>
       prevCart.filter((cartItem) => cartItem._id !== item._id)
+    );
+  };
+
+  const handleCountChange = (e) => {
+    setCart((prevCart) =>
+      prevCart.map((cartItem) =>
+        cartItem._id === item._id
+          ? { ...cartItem, quantity: +e.target.value }
+          : cartItem
+      )
     );
   };
 
@@ -30,16 +40,8 @@ const CartItem = ({ item }) => {
           type="number"
           min={1}
           max={item.count}
-          value={item.count}
-          onChange={(e) =>
-            setCart((prevCart) =>
-              prevCart.map((cartItem) =>
-                cartItem._id === item._id
-                  ? { ...cartItem, count: e.target.value }
-                  : cartItem
-              )
-            )
-          }
+          value={item.quantity}
+          onChange={handleCountChange}
           className="text-xs bg-[#22333B] text-white rounded-full px-3 py-1 w-16"
         />
         <button onClick={handleOnRemove} className="text-red-600">

@@ -10,11 +10,11 @@ function ProductCard({ product }) {
       if (existingItem) {
         return prevCart.map((item) =>
           item._id === product._id
-            ? { ...item, count: +item.count + +count }
+            ? { ...item, quantity: +item.quantity + +count }
             : item
         );
       }
-      return [...prevCart, { ...product, count }];
+      return [...prevCart, { ...product, quantity: count }];
     });
   };
 
