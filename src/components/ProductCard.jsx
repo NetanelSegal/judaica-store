@@ -23,7 +23,7 @@ function ProductCard({ product }) {
   return (
     <div
       onClick={() => nav(`/product/${product._id}`)}
-      className="bg-white shrink-0 rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition-all w-full max-w-xs"
+      className="bg-white cursor-pointer shrink-0 rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition-all w-full max-w-xs"
     >
       <img
         src={product.image}
