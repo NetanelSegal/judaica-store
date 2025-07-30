@@ -14,7 +14,9 @@ import SignupPage from "./pages/SignupPage";
 import AuthContext from "./contexts/AuthContext";
 import { useEffect, useState } from "react";
 import CartContext from "./contexts/CartContext";
-
+import PaymentSuccess from "./pages/PaymentSuccess";
+import PaymentCancel from "./pages/PaymentCancel";
+import Page404 from "./pages/Page404";
 export const links = [
   {
     path: "/",
@@ -40,12 +42,16 @@ export const links = [
     element: <SignupPage />,
     allowedRoles: ["guest"],
   },
-
   {
     path: "/admin",
     title: "Admin",
     element: <AdminPage />,
     allowedRoles: ["admin"],
+  },
+  {
+    path: "*",
+    element: <Page404 />,
+    allowedRoles: ["admin", "user", "guest"],
   },
 ];
 
@@ -80,6 +86,8 @@ function App() {
                 <Route path={path} element={element} />
               )
             )}
+            <Route path="/payment-success" element={<PaymentSuccess />} />
+            <Route path="/payment-cancel" element={<PaymentCancel />} />
           </Routes>
         </CartContext.Provider>
       </AuthContext.Provider>

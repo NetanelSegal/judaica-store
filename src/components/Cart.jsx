@@ -2,16 +2,14 @@ import { useState } from "react";
 import CartItem from "./CartItem";
 import { useContext } from "react";
 import CartContext from "../contexts/CartContext";
-import { useStripe } from "@stripe/react-stripe-js";
-import axios from "axios";
 import { useNavigate } from "react-router";
+import { api } from "../utils/api";
 
 export default function Cart() {
   const { cart, setCart } = useContext(CartContext);
   const nav = useNavigate();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const stripe = useStripe();
 
   const toggleCart = () => setOpen(!open);
 
@@ -21,12 +19,9 @@ export default function Cart() {
     setLoading(true);
     try {
       // Send cart info to backend to create a Stripe Checkout session
-      const { data } = await axios.post(
-        "http://localhost:3000/create-checkout-session",
-        {
-          items: cart,
-        }
-      );
+      const { data } = await api.post("/stripe/create-checkout-session", {
+        items: cart,
+      });
 
       window.location.href = data;
     } catch (err) {
