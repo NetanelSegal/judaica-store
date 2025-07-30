@@ -1,8 +1,10 @@
 import { useContext, useState } from "react";
 import CartContext from "../contexts/CartContext";
+import { useNavigate } from "react-router";
 
 function ProductCard({ product }) {
-  const { cart, setCart } = useContext(CartContext);
+  const nav = useNavigate();
+  const { setCart } = useContext(CartContext);
 
   const addToCart = (count) => {
     setCart((prevCart) => {
@@ -19,7 +21,10 @@ function ProductCard({ product }) {
   };
 
   return (
-    <div className="bg-white shrink-0 rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition-all w-full max-w-xs">
+    <div
+      onClick={() => nav(`/product/${product._id}`)}
+      className="bg-white shrink-0 rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition-all w-full max-w-xs"
+    >
       <img
         src={product.image}
         alt={product.name}

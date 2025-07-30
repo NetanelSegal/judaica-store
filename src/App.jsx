@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 import CartContext from "./contexts/CartContext";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import PaymentCancel from "./pages/PaymentCancel";
+import ProductPage from "./pages/ProductPage";
 import Page404 from "./pages/Page404";
 export const links = [
   {
@@ -47,6 +48,11 @@ export const links = [
     title: "Admin",
     element: <AdminPage />,
     allowedRoles: ["admin"],
+  },
+  {
+    path: "/product/:id",
+    element: <ProductPage />,
+    allowedRoles: ["user", "admin", "guest"],
   },
   {
     path: "*",
