@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 
-export default function PaymentCancel() {
+export default function PayPmentCancel() {
   const navigate = useNavigate();
 
   useEffect(() => {

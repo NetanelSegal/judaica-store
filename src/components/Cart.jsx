@@ -6,19 +6,16 @@ import { useNavigate } from "react-router";
 import { api } from "../utils/api";
 
 export default function Cart() {
-  const { cart, setCart } = useContext(CartContext);
+  const { cart, setCart, toggleCart, isCartOpen } = useContext(CartContext);
   const nav = useNavigate();
-  const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  const toggleCart = () => setOpen(!open);
 
   const clearCart = () => setCart([]);
 
   const handleCheckout = async () => {
     setLoading(true);
+
     try {
-      // Send cart info to backend to create a Stripe Checkout session
       const { data } = await api.post("/stripe/create-checkout-session", {
         items: cart,
       });
@@ -40,7 +37,7 @@ export default function Cart() {
       >
         <i className="fa-solid fa-bag-shopping " />
       </button>
-      {open && (
+      {isCartOpen && (
         <div className="absolute text-black p-5 bg-white shadow-2xl rounded-2xl z-50 top-[calc(100%+10px)] right-0">
           <h2 className="text-2xl font-bold mb-4">Cart</h2>
           <div className="flex flex-col  gap-2 w-72 mb-2">

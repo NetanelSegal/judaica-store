@@ -3,9 +3,11 @@ import AuthContext from "../../contexts/AuthContext";
 import { api } from "../../utils/api";
 import Error from "../../components/Error";
 import { useNavigate } from "react-router";
+import CartContext from "../../contexts/CartContext";
 
 const LoginPage = () => {
   const { setUser } = useContext(AuthContext);
+  const { setCart } = useContext(CartContext);
   const nav = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -27,9 +29,10 @@ const LoginPage = () => {
         "http://localhost:3000/auth/login",
         formData
       );
-      const { token, user } = data;
+      const { token, user, cart } = data;
       localStorage.setItem("token", token);
       setUser(user);
+      setCart(cart);
       setError("");
       nav("/products");
     } catch (err) {

@@ -1,8 +1,5 @@
 import { api } from "./utils/api";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
 
-const stripePromise = loadStripe("pk_test_YOUR_PUBLISHABLE_KEY"); // TODO: Replace with your real key
 import { Route, Routes } from "react-router";
 import "./App.css";
 import HomePage from "./pages/HomePage";
@@ -18,6 +15,7 @@ import PaymentSuccess from "./pages/PaymentSuccess";
 import PaymentCancel from "./pages/PaymentCancel";
 import ProductPage from "./pages/ProductPage";
 import Page404 from "./pages/Page404";
+
 export const links = [
   {
     path: "/",
@@ -55,6 +53,16 @@ export const links = [
     allowedRoles: ["user", "admin", "guest"],
   },
   {
+    path: "/payment-success",
+    element: <PaymentSuccess />,
+    allowedRoles: ["user", "admin"],
+  },
+  {
+    path: "/payment-cancel",
+    element: <PaymentCancel />,
+    allowedRoles: ["user", "admin"],
+  },
+  {
     path: "*",
     element: <Page404 />,
     allowedRoles: ["admin", "user", "guest"],
@@ -68,36 +76,45 @@ export const filterLinks = (links, role) => {
 function App() {
   const [user, setUser] = useState(null);
   const [cart, setCart] = useState([]);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   useEffect(() => {
     const validateToken = async () => {
       try {
         const { data } = await api.get("auth/validate");
-        setUser(data);
+        setUser(data.user);
+        setCart(data.cart);
       } catch (error) {
         console.error(error);
       }
     };
+
     validateToken();
   }, []);
+  console.log(cart);
 
   return (
-    <Elements stripe={stripePromise}>
-      <AuthContext.Provider value={{ user, setUser }}>
-        <CartContext.Provider value={{ cart, setCart }}>
-          <Navbar />
-          <Routes>
-            {filterLinks(links, user?.role || "guest").map(
-              ({ path, element }) => (
-                <Route path={path} element={element} />
-              )
-            )}
-            <Route path="/payment-success" element={<PaymentSuccess />} />
-            <Route path="/payment-cancel" element={<PaymentCancel />} />
-          </Routes>
-        </CartContext.Provider>
-      </AuthContext.Provider>
-    </Elements>
+    <AuthContext.Provider value={{ user, setUser }}>
+      <CartContext.Provider
+        value={{
+          cart,
+          setCart,
+          isCartOpen,
+          openCart: () => setIsCartOpen(true),
+          closeCart: () => setIsCartOpen(false),
+          toggleCart: () => setIsCartOpen(!isCartOpen),
+        }}
+      >
+        <Navbar />
+        <Routes>
+          {filterLinks(links, user?.role || "guest").map(
+            ({ path, element }) => (
+              <Route path={path} element={element} />
+            )
+          )}
+        </Routes>
+      </CartContext.Provider>
+    </AuthContext.Provider>
   );
 }
 
